@@ -57,10 +57,6 @@ Then go to `http://localhost:8000` from your browser and see the app.
 
 
 
-## Ask a question?
-
-If you have any query please contact at mosraki@gmail.com
-
 ## Screenshot
 
 ![Home Page](/screenshots/1.PNG)
