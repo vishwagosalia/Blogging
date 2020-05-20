@@ -65,13 +65,8 @@ If you have any query please contact at mosraki@gmail.com
 
 ![Home Page](/screenshots/1.PNG)
 ![Front Page Category](/screenshots/2.PNG)
-![Category Posts](/screenshots/3.PNG)
-![NewsLetter Subscribe](/screenshots/4.PNG)
-![Blog Footer](/screenshots/5.PNG)
 ![Search Page](/screenshots/6.PNG)
 ![Category Post page](/screenshots/7.PNG)
 ![Single Post Page](/screenshots/8.PNG)
-![Share Tag Posts](/screenshots/9.PNG)
-![Comments Section](/screenshots/10.PNG)
 ![admin](/screenshots/11.PNG)
 
