@@ -5,7 +5,7 @@ This is built on Laravel Framework 5.5. This was built for demonstrate purpose.
 
 Clone the repository-
 ```
-https://github.com/hpez/Blog-laravel.git
+https://github.com/vishwagosalia/Blogging.git
 ```
 
 Then cd into the folder with this command-
@@ -57,21 +57,12 @@ Then go to `http://localhost:8000` from your browser and see the app.
 
 
 
-## Ask a question?
-
-If you have any query please contact at mosraki@gmail.com
-
 ## Screenshot
 
 ![Home Page](/screenshots/1.PNG)
 ![Front Page Category](/screenshots/2.PNG)
-![Category Posts](/screenshots/3.PNG)
-![NewsLetter Subscribe](/screenshots/4.PNG)
-![Blog Footer](/screenshots/5.PNG)
 ![Search Page](/screenshots/6.PNG)
 ![Category Post page](/screenshots/7.PNG)
 ![Single Post Page](/screenshots/8.PNG)
-![Share Tag Posts](/screenshots/9.PNG)
-![Comments Section](/screenshots/10.PNG)
 ![admin](/screenshots/11.PNG)
 
