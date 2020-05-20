@@ -14,9 +14,9 @@ class SettingTableSeeder extends Seeder
         \App\Setting::create([
 
            'site_name' =>"Shailja's Blog",
-           'contact_number' =>'8369913940',
+           'contact_number' =>'9999999999',
            'contact_email' =>'admin@gmail.com',
-           'address' =>'Ramjharukha CHS'
+           'address' =>'Ganesh CHS'
         ]);
     }
 }
