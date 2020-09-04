@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,286 +10,286 @@
 |
 */
 
-	Route::post('/subscribe', function(){
+Route::post('/subscribe', function () {
 
-           $email =request('email');
-           Newsletter::subscribe($email);
-           Session::flash('subscribed','Successfully Subscribed');
+	$email = request('email');
+	Newsletter::subscribe($email);
+	Session::flash('subscribed', 'Successfully Subscribed');
 
-           return redirect()->back();
+	return redirect()->back();
+});
+Route::get('/', [
 
-	});
-		Route::get('/',[
-
-		          'uses' => 'FrontEndController@index',
-		          'as' => 'index'
-
-
-		 ]);
-		Route::get('/post/{slug}',[
-
-		          'uses' => 'FrontEndController@singlePost',
-		          'as' => 'post.single'
+	'uses' => 'FrontEndController@index',
+	'as' => 'index'
 
 
-		 ]);
-		Route::get('/category/{id}',[
+]);
+Route::get('/post/{slug}', [
 
-		          'uses' => 'FrontEndController@category',
-		          'as' => 'category.single'
-
-
-		 ]);
-		Route::get('/tag/{id}',[
-
-				          'uses' => 'FrontEndController@tag',
-				          'as' => 'tag.single'
+	'uses' => 'FrontEndController@singlePost',
+	'as' => 'post.single'
 
 
-				 ]);
-		Route::get('/results', function(){
+]);
+Route::get('/category/{id}', [
 
-            $posts = \App\Post::where('title', 'like', '%' . request('query') .'%')->get();
+	'uses' => 'FrontEndController@category',
+	'as' => 'category.single'
 
-            return view('results')->with('posts', $posts)
-                                  ->with('title', 'Search results:' .request('query'))
-                                  ->with('settings', \App\Setting::first())
-                                  ->with('categories', \App\Category::take(7)->get())
-                                  ->with('query', request('query'));
 
-		});
+]);
+Route::get('/tag/{id}', [
+
+	'uses' => 'FrontEndController@tag',
+	'as' => 'tag.single'
+
+
+]);
+Route::get('/results', function () {
+
+	$posts = \App\Post::where('title', 'like', '%' . request('query') . '%')->get();
+
+	return view('results')->with('posts', $posts)
+		->with('title', 'Search results:' . request('query'))
+		->with('settings', \App\Setting::first())
+		->with('categories', \App\Category::take(7)->get())
+		->with('query', request('query'));
+});
 
 
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
-		Route::get('/dashboard',[
+	Route::get('/dashboard', [
 
-		 'uses' => 'HomeController@index',
-		  'as' => 'home'
-		]);
+		'uses' => 'HomeController@index',
+		'as' => 'home'
+	]);
 
-		Route::get('/post/create',[
+	Route::get('/home', [
 
+		'uses' => 'HomeController@index',
+		'as' => 'home'
+	]);
 
-		        'uses' => 'PostsController@create',
-		        'as' => 'post.create'
+	Route::get('/post/create', [
 
-		]);
 
-		Route::post('/post/store',[
+		'uses' => 'PostsController@create',
+		'as' => 'post.create'
 
+	]);
 
-		        'uses' => 'PostsController@store',
-		        'as' => 'post.store'
+	Route::post('/post/store', [
 
-		]);
-		Route::get('/posts',[
 
+		'uses' => 'PostsController@store',
+		'as' => 'post.store'
 
-		        'uses' => 'PostsController@index',
-		        'as' => 'posts'
+	]);
+	Route::get('/posts', [
 
-		]);
-		Route::get('/posts/delete/{id}',[
 
+		'uses' => 'PostsController@index',
+		'as' => 'posts'
 
-		        'uses' => 'PostsController@destroy',
-		        'as' => 'posts.delete'
+	]);
+	Route::get('/posts/delete/{id}', [
 
-		]);
-		Route::get('/posts/trashed',[
 
+		'uses' => 'PostsController@destroy',
+		'as' => 'posts.delete'
 
-				        'uses' => 'PostsController@trashed',
-				        'as' => 'posts.trashed'
+	]);
+	Route::get('/posts/trashed', [
 
-		]);
-		Route::get('/posts/kill/{id}',[
 
+		'uses' => 'PostsController@trashed',
+		'as' => 'posts.trashed'
 
-				        'uses' => 'PostsController@kill',
-				        'as' => 'post.kill'
+	]);
+	Route::get('/posts/kill/{id}', [
 
-		]);
-		Route::get('/posts/restore/{id}',[
 
+		'uses' => 'PostsController@kill',
+		'as' => 'post.kill'
 
-				        'uses' => 'PostsController@restore',
-				        'as' => 'posts.restore'
+	]);
+	Route::get('/posts/restore/{id}', [
 
-		]);
-		Route::get('/posts/edit/{id}',[
 
+		'uses' => 'PostsController@restore',
+		'as' => 'posts.restore'
 
-				        'uses' => 'PostsController@edit',
-				        'as' => 'posts.edit'
+	]);
+	Route::get('/posts/edit/{id}', [
 
-		]);
-		Route::post('/posts/update/{id}',[
 
+		'uses' => 'PostsController@edit',
+		'as' => 'posts.edit'
 
-				        'uses' => 'PostsController@update',
-				        'as' => 'posts.update'
+	]);
+	Route::post('/posts/update/{id}', [
 
-		]);
 
-		Route::get('/category/create',[
+		'uses' => 'PostsController@update',
+		'as' => 'posts.update'
 
+	]);
 
-		        'uses' => 'CategoryController@create',
-		        'as' => 'category.create'
+	Route::get('/category/create', [
 
-		]);
 
-		Route::post('/category/store',[
+		'uses' => 'CategoryController@create',
+		'as' => 'category.create'
 
+	]);
 
-		        'uses' => 'CategoryController@store',
-		        'as' => 'category.store'
+	Route::post('/category/store', [
 
-		]);
 
-		Route::get('/categories',[
+		'uses' => 'CategoryController@store',
+		'as' => 'category.store'
 
+	]);
 
-				        'uses' => 'CategoryController@index',
-				        'as' => 'categories'
+	Route::get('/categories', [
 
-		]);
-		Route::get('/category/edit/{id}',[
 
+		'uses' => 'CategoryController@index',
+		'as' => 'categories'
 
-				        'uses' => 'CategoryController@edit',
-				        'as' => 'category.edit'
+	]);
+	Route::get('/category/edit/{id}', [
 
-		]);
-		Route::get('/category/delete/{id}',[
 
+		'uses' => 'CategoryController@edit',
+		'as' => 'category.edit'
 
-				        'uses' => 'CategoryController@destroy',
-				        'as' => 'category.delete'
+	]);
+	Route::get('/category/delete/{id}', [
 
-		]);
-		Route::post('/category/update/{id}',[
 
+		'uses' => 'CategoryController@destroy',
+		'as' => 'category.delete'
 
-				        'uses' => 'CategoryController@update',
-				        'as' => 'category.update'
+	]);
+	Route::post('/category/update/{id}', [
 
-		]);
 
-		Route::get('/tags',[
-                          
-                          'uses' => 'TagsController@index',
-                          'as' => 'tags'
+		'uses' => 'CategoryController@update',
+		'as' => 'category.update'
 
-		]);
-		Route::get('/tags/create',[
-                          
-                          'uses' => 'TagsController@create',
-                          'as' => 'tag.create'
+	]);
 
-		]);
-		Route::post('/tags/store',[
-                          
-                          'uses' => 'TagsController@store',
-                          'as' => 'tag.store'
+	Route::get('/tags', [
 
-		]);
-		Route::get('/tags/edit/{id}',[
-                          
-                          'uses' => 'TagsController@edit',
-                          'as' => 'tag.edit'
+		'uses' => 'TagsController@index',
+		'as' => 'tags'
 
-		]);
-		Route::post('/tags/update/{id}',[
-                          
-                          'uses' => 'TagsController@update',
-                          'as' => 'tag.update'
+	]);
+	Route::get('/tags/create', [
 
-		]);
-		Route::get('/tags/delete/{id}',[
-                          
-                          'uses' => 'TagsController@destroy',
-                          'as' => 'tag.delete'
+		'uses' => 'TagsController@create',
+		'as' => 'tag.create'
 
-		]);
-		Route::get('/users', [
+	]);
+	Route::post('/tags/store', [
 
+		'uses' => 'TagsController@store',
+		'as' => 'tag.store'
 
+	]);
+	Route::get('/tags/edit/{id}', [
 
-                  'uses' => 'UsersController@index',
-                  'as'   => 'users'
-		]);
-		Route::get('/user/create', [
+		'uses' => 'TagsController@edit',
+		'as' => 'tag.edit'
 
+	]);
+	Route::post('/tags/update/{id}', [
 
+		'uses' => 'TagsController@update',
+		'as' => 'tag.update'
 
-		                  'uses' => 'UsersController@create',
-		                  'as'   => 'user.create'
-		]);
-		Route::post('/user/store', [
+	]);
+	Route::get('/tags/delete/{id}', [
 
+		'uses' => 'TagsController@destroy',
+		'as' => 'tag.delete'
 
+	]);
+	Route::get('/users', [
 
-		                  'uses' => 'UsersController@store',
-		                  'as'   => 'user.store'
-		]);
-		Route::get('/user/admin/{id}', [
 
 
+		'uses' => 'UsersController@index',
+		'as'   => 'users'
+	]);
+	Route::get('/user/create', [
 
-		                  'uses' => 'UsersController@admin',
-		                  'as'   => 'user.admin'
-		]);
 
-		Route::get('/user/not-admin/{id}', [
 
+		'uses' => 'UsersController@create',
+		'as'   => 'user.create'
+	]);
+	Route::post('/user/store', [
 
 
-		                  'uses' => 'UsersController@not_admin',
-		                  'as'   => 'user.not_admin'
-		]);
-       Route::get('/user/profile', [
 
+		'uses' => 'UsersController@store',
+		'as'   => 'user.store'
+	]);
+	Route::get('/user/admin/{id}', [
 
 
-		                  'uses' => 'ProfilesController@index',
-		                  'as'   => 'user.profile'
-		]);
-		 Route::post('/user/profile/update', [
 
+		'uses' => 'UsersController@admin',
+		'as'   => 'user.admin'
+	]);
 
+	Route::get('/user/not-admin/{id}', [
 
-		                  'uses' => 'ProfilesController@update',
-		                  'as'   => 'user.profile.update'
-		]);
-		 Route::get('/user/delete/{id}', [
 
 
+		'uses' => 'UsersController@not_admin',
+		'as'   => 'user.not_admin'
+	]);
+	Route::get('/user/profile', [
 
-		                  'uses' => 'UsersController@destroy',
-		                  'as'   => 'user.delete'
-		]);
-		 Route::get('/settings', [
 
 
+		'uses' => 'ProfilesController@index',
+		'as'   => 'user.profile'
+	]);
+	Route::post('/user/profile/update', [
 
-		                  'uses' => 'SettingsController@index',
-		                  'as'   => 'settings'
-		]);
-		 Route::post('/settings/update', [
 
 
+		'uses' => 'ProfilesController@update',
+		'as'   => 'user.profile.update'
+	]);
+	Route::get('/user/delete/{id}', [
 
-		                  'uses' => 'SettingsController@update',
-		                  'as'   => 'settings.update'
-		]);
 
 
-    
+		'uses' => 'UsersController@destroy',
+		'as'   => 'user.delete'
+	]);
+	Route::get('/settings', [
+
+
+
+		'uses' => 'SettingsController@index',
+		'as'   => 'settings'
+	]);
+	Route::post('/settings/update', [
+
+
+
+		'uses' => 'SettingsController@update',
+		'as'   => 'settings.update'
+	]);
 });
-
